@@ -1,6 +1,8 @@
 import React from "react";
 import logo from "../logo.svg"
 import {Navbar} from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faSearch, faVideo} from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
     return (
@@ -13,7 +15,7 @@ const Header = () => {
                     height="30"
                     className="d-inline-block align-top"
                 />
-                React Movie Search App
+                React Movie Search App <FontAwesomeIcon icon={faVideo}/> <FontAwesomeIcon icon={faSearch}/>
             </Navbar.Brand>
         </Navbar>
     );

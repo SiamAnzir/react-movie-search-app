@@ -26,7 +26,7 @@ const Search = (props) => {
                                  onChange={handleSearchInputChanges}
                                  type="text"
                     />
-                    <Button variant="success"type="submit" onClick={handleSubmit} style={{ marginLeft: '.5rem' }}>Search</Button>
+                    <Button variant="success" type="submit" onClick={handleSubmit} style={{ marginLeft: '.5rem' }}>Search</Button>
                 </Form>
             </Row>
         </Container>
