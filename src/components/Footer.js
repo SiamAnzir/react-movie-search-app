@@ -3,9 +3,12 @@ import {Container} from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faSourcetree} from "@fortawesome/free-brands-svg-icons";
 
-const Footer = () => {
+const Footer = (props) => {
     return(
-        <div className="footer">
+        <div className="footer" style={{
+            backgroundColor: props.themeState.background,
+            color: props.themeState.foreground
+        }}>
             <hr/>
             <Container className="text-center">
                 <div>

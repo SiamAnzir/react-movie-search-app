@@ -17,19 +17,24 @@ const Search = (props) => {
     }
 
     return(
-        <Container>
-            <br/>
-            <Row className="justify-content-center">
-                <Form inline>
-                    <FormControl placeholder="Search Movie By Title"
-                                 value={searchValue}
-                                 onChange={handleSearchInputChanges}
-                                 type="text"
-                    />
-                    <Button variant="success" type="submit" onClick={handleSubmit} style={{ marginLeft: '.5rem' }}>Search</Button>
-                </Form>
-            </Row>
-        </Container>
+        <section style={{
+            backgroundColor: props.themeState.background,
+            color: props.themeState.foreground
+        }}>
+            <Container>
+                <br/>
+                <Row className="justify-content-center">
+                    <Form inline>
+                        <FormControl placeholder="Search Movie By Title"
+                                     value={searchValue}
+                                     onChange={handleSearchInputChanges}
+                                     type="text"
+                        />
+                        <Button variant="success" type="submit" onClick={handleSubmit} style={{ marginLeft: '.5rem' }}>Search</Button>
+                    </Form>
+                </Row>
+            </Container>
+        </section>
     )
 }
 

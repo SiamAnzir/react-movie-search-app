@@ -1,9 +1,10 @@
-import React, {useState,useEffect} from "react";
+import React, {useState,useEffect,useContext} from "react";
 import './App.css';
 import Header from "./components/Header";
 import Movies from "./components/Movies";
 import Search from "./components/Search";
 import Footer from "./components/Footer";
+import {ThemeContext} from "./context/ThemeContext";
 import {Container,Spinner} from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faSearch} from "@fortawesome/free-solid-svg-icons";
@@ -15,6 +16,9 @@ const App = () => {
     const [movies, setMovies] = useState([]);
     const [errorMessage, setErrorMessage] = useState(null);
     const [loading,setLoading] = useState(true);
+
+    const theme = useContext(ThemeContext);
+    const [themeState, setThemeState] = useState(theme.light);
 
     useEffect(() => {
         fetch(MOVIE_API_URL)
@@ -45,9 +49,8 @@ const App = () => {
     };
     return(
         <section>
-            <Header/>
-            <Search search={search}/>
-            <br/>
+            <Header theme={theme} themeState={themeState} setThemeState={setThemeState}/>
+            <Search search={search} themeState={themeState}/>
             {
                 loading && !errorMessage ? (
                     <Container className="text-center">
@@ -64,10 +67,10 @@ const App = () => {
                         <p><a href="/"> Go Back </a></p>
                     </Container>
                 ) : (
-                    <Movies movies={movies}/>
+                    <Movies movies={movies} themeState={themeState}/>
                 )
             }
-            <Footer/>
+            <Footer themeState={themeState}/>
         </section>
     )
 }

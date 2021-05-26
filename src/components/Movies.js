@@ -6,7 +6,11 @@ import {faFilm} from "@fortawesome/free-solid-svg-icons";
 const Movies = (props) => {
     const allMovies = props.movies.map(movie => (
         <Col>
-            <Card key={movie.imdbID} style={{ width: '15rem' }}>
+            <Card key={movie.imdbID} border="success" style={{
+                width: '15rem',
+                backgroundColor: props.themeState.background,
+                color: props.themeState.foreground
+            }}>
                 <Card.Img variant="top" src={movie.Poster} height={340} />
                 <Card.Body className="text-center">
                     <Card.Text>{movie.Title}</Card.Text>
@@ -19,7 +23,11 @@ const Movies = (props) => {
         </Col>
     ))
     return(
-        <section>
+        <section  style={{
+            backgroundColor: props.themeState.background,
+            color: props.themeState.foreground
+        }}>
+            <br/>
             <Row className="justify-content-center">
                 <h2><FontAwesomeIcon icon={faFilm}/> Movies <FontAwesomeIcon icon={faFilm}/></h2>
             </Row>

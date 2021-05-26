@@ -2,11 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import {ThemeContext} from "./context/ThemeContext";
+import {themes} from "./context/ThemeContext";
 import 'bootstrap/dist/css/bootstrap.min.css';;
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ThemeContext.Provider value={themes}>
+        <App/>
+    </ThemeContext.Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
