@@ -13,7 +13,6 @@ const Search = (props) => {
         event.preventDefault();
         props.search(searchValue);
         setSearchValue("");
-        console.log("clicked");
     }
 
     return(

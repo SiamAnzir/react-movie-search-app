@@ -11,7 +11,7 @@ import {faSearch} from "@fortawesome/free-solid-svg-icons";
 
 const App = () => {
 
-    const MOVIE_API_URL = "http://www.omdbapi.com/?s=man&apikey=346a3183";
+    const MOVIE_API_URL = "https://www.omdbapi.com/?s=man&apikey=346a3183";
 
     const [movies, setMovies] = useState([]);
     const [errorMessage, setErrorMessage] = useState(null);
@@ -26,7 +26,6 @@ const App = () => {
             .then(jsonResponse => {
                 setMovies(jsonResponse.Search);
                 setLoading(false);
-                console.log(jsonResponse);
             });
     }, []);
 
@@ -69,7 +68,7 @@ const App = () => {
                                 <h3>{errorMessage}</h3>
                                 <p> <FontAwesomeIcon icon={faSearch}/> Do Search Again </p>
                                 <p> Or </p>
-                                <p><a href="/"> Go Back </a></p>
+                                <p><a href="/react-movie-search-app/"> Go Back </a></p>
                             </Container>
                         ) : (
                             <Movies movies={movies} themeState={themeState}/>

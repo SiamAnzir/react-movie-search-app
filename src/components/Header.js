@@ -16,7 +16,7 @@ const Header = (props) => {
     return (
         <Navbar bg="dark" variant="dark" expand="lg">
             <Container  className="justify-content-center">
-                <Navbar.Brand href="/">
+                <Navbar.Brand href="/react-movie-search-app/">
                     <img
                         alt="react-logo"
                         src={logo}
