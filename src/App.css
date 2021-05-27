@@ -28,6 +28,11 @@
   color: #61dafb;
 }
 
+.mainContent{
+  position: relative;
+  min-height: 100vh;
+}
+
 .footer{
   padding: 2rem;
   bottom: 0;

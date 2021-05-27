@@ -7,11 +7,9 @@ import {themes} from "./context/ThemeContext";
 import 'bootstrap/dist/css/bootstrap.min.css';;
 
 ReactDOM.render(
-  <React.StrictMode>
     <ThemeContext.Provider value={themes}>
         <App/>
-    </ThemeContext.Provider>
-  </React.StrictMode>,
+    </ThemeContext.Provider>,
   document.getElementById('root')
 );
 

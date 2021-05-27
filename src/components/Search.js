@@ -17,10 +17,7 @@ const Search = (props) => {
     }
 
     return(
-        <section style={{
-            backgroundColor: props.themeState.background,
-            color: props.themeState.foreground
-        }}>
+        <section>
             <Container>
                 <br/>
                 <Row className="justify-content-center">

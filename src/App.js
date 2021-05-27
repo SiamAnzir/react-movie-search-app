@@ -18,7 +18,7 @@ const App = () => {
     const [loading,setLoading] = useState(true);
 
     const theme = useContext(ThemeContext);
-    const [themeState, setThemeState] = useState(theme.light);
+    const [themeState, setThemeState] = useState(theme.dark);
 
     useEffect(() => {
         fetch(MOVIE_API_URL)
@@ -48,29 +48,35 @@ const App = () => {
             });
     };
     return(
-        <section>
+        <section style={{
+            backgroundColor: themeState.background,
+            color: themeState.foreground
+        }}>
             <Header theme={theme} themeState={themeState} setThemeState={setThemeState}/>
-            <Search search={search} themeState={themeState}/>
-            {
-                loading && !errorMessage ? (
-                    <Container className="text-center">
-                        <Spinner animation="border" role="status">
-                            <span className="sr-only">Loading...</span>
-                        </Spinner>
-                    </Container>
-                    ):
-                errorMessage ? (
-                    <Container className="text-center">
-                        <h3>{errorMessage}</h3>
-                        <p> <FontAwesomeIcon icon={faSearch}/> Do Search Again </p>
-                        <p> Or </p>
-                        <p><a href="/"> Go Back </a></p>
-                    </Container>
-                ) : (
-                    <Movies movies={movies} themeState={themeState}/>
-                )
-            }
-            <Footer themeState={themeState}/>
+            <section className="mainContent">
+                <Search search={search}/>
+                <br/>
+                {
+                    loading && !errorMessage ? (
+                            <Container className="text-center">
+                                <Spinner animation="border" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </Spinner>
+                            </Container>
+                        ):
+                        errorMessage ? (
+                            <Container className="text-center">
+                                <h3>{errorMessage}</h3>
+                                <p> <FontAwesomeIcon icon={faSearch}/> Do Search Again </p>
+                                <p> Or </p>
+                                <p><a href="/"> Go Back </a></p>
+                            </Container>
+                        ) : (
+                            <Movies movies={movies} themeState={themeState}/>
+                        )
+                }
+            </section>
+            <Footer/>
         </section>
     )
 }

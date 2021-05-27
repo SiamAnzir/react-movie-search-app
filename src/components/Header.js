@@ -1,8 +1,8 @@
 import React from "react";
 import logo from "../logo.svg"
-import {Container, Nav, Navbar, OverlayTrigger, Tooltip} from "react-bootstrap";
+import {Container,Navbar, OverlayTrigger, Tooltip} from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faSearch, faVideo} from "@fortawesome/free-solid-svg-icons";
+import {faMoon, faSearch, faVideo} from "@fortawesome/free-solid-svg-icons";
 
 const Header = (props) => {
 
@@ -29,16 +29,16 @@ const Header = (props) => {
             </Container>
             <div>
                 {
-                    (props.themeState === props.theme.light) ? (
-                        <OverlayTrigger key="bottom" placement="bottom" overlay={<Tooltip id={'tooltip-bottom'}> Turn Dark Mode On </Tooltip>}>
-                            <span role="img" aria-label="sun" onClick={darkMode} style={{cursor:"pointer"}}>
-                            🌞
+                    (props.themeState === props.theme.dark) ? (
+                        <OverlayTrigger key="bottom" placement="bottom" overlay={<Tooltip id={'tooltip-bottom'}> Turn Dark Mode Off </Tooltip>}>
+                            <span onClick={lightMode} style={{cursor:"pointer"}}>
+                                <FontAwesomeIcon icon={faMoon} color="white"/>
                             </span>
                         </OverlayTrigger>
                     ):(
-                        <OverlayTrigger key="bottom" placement="bottom" overlay={<Tooltip id={'tooltip-bottom'}> Turn Light Mode On </Tooltip>}>
-                            <span role="img" aria-label="moon" onClick={lightMode} style={{cursor:"pointer"}}>
-                            🌚
+                        <OverlayTrigger key="bottom" placement="bottom" overlay={<Tooltip id={'tooltip-bottom'}> Turn Dark Mode On </Tooltip>}>
+                            <span role="img" aria-label="sun" onClick={darkMode} style={{cursor:"pointer"}}>
+                                🌞
                             </span>
                         </OverlayTrigger>
                     )
