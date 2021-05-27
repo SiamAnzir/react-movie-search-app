@@ -47,11 +47,5 @@ const Movies = (props) => {
         </section>
     )
 }
-/**
- * <Card.Footer className="border-0">
- <Row className="justify-content-center">
- {movie.Year}
- </Row>
- </Card.Footer>**/
 
 export default Movies;
