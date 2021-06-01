@@ -1,4 +1,4 @@
-import React, {useState,useEffect,useContext} from "react";
+import React, {useState,useEffect,useContext , useReducer } from "react";
 import './App.css';
 import Header from "./components/Header";
 import Movies from "./components/Movies";
@@ -13,39 +13,95 @@ const App = () => {
 
     const MOVIE_API_URL = "https://www.omdbapi.com/?s=man&apikey=346a3183";
 
-    const [movies, setMovies] = useState([]);
-    const [errorMessage, setErrorMessage] = useState(null);
-    const [loading,setLoading] = useState(true);
+    const reducer = (state,action) => {
 
+        switch (action.type){
+            case "GET_MOVIES_REQUEST":
+                return{
+                    ...state,
+                    loading:true,
+                    errorMessage:null
+                };
+
+            case "GET_MOVIES_SUCCESS":
+                return {
+                    ...state,
+                    loading:false,
+                    movies:action.payload
+                };
+
+            case "GET_MOVIES_FAILURE":
+                return {
+                    ...state,
+                    loading:false,
+                    errorMessage:action.error
+                };
+
+            default:
+                return state;
+        }
+    };
+
+    /** const [movies, setMovies] = useState([]);
+     const [errorMessage, setErrorMessage] = useState(null);
+     const [loading,setLoading] = useState(true); **/
+
+    const initialState = {
+        loading:true,
+        movies:[],
+        errorMessage:null
+    };
+
+    const [state,dispatch] = useReducer(reducer, initialState);
     const theme = useContext(ThemeContext);
     const [themeState, setThemeState] = useState(theme.dark);
+
+    const { loading , movies, errorMessage} = state;
 
     useEffect(() => {
         fetch(MOVIE_API_URL)
             .then(response => response.json())
             .then(jsonResponse => {
-                setMovies(jsonResponse.Search);
-                setLoading(false);
+
+                dispatch({
+                    type: "GET_MOVIES_SUCCESS",
+                    payload: jsonResponse.Search
+                });
+
+                /** setMovies(jsonResponse.Search);
+                setLoading(false); **/
             });
     }, []);
 
     const search = (searchValue) => {
+        dispatch({
+            type:"GET_MOVIES_REQUEST"
+        });
 
-        setErrorMessage(null);
-        setLoading(true);
+        /** setErrorMessage(null);
+        setLoading(true); **/
 
         fetch(`https://www.omdbapi.com/?s=${searchValue}&apikey=346a3183`)
             .then(response => response.json())
             .then(jsonResponse => {
                 if (jsonResponse.Response === "True") {
-                    setMovies(jsonResponse.Search);
-                    setLoading(false);
+                    dispatch({
+                        type: "GET_MOVIES_SUCCESS",
+                        payload: jsonResponse.Search
+                    });
+                    /** setMovies(jsonResponse.Search);
+                    setLoading(false); **/
                 } else {
-                    setErrorMessage(jsonResponse.Error);
-                    setLoading(false);
+                    dispatch({
+                        type: "GET_MOVIES_FAILURE",
+                        error: jsonResponse.Error
+                    });
+                    /** setErrorMessage(jsonResponse.Error);
+                    setLoading(false); **/
                 }
             });
     };
+
     return(
         <section style={{
             backgroundColor: themeState.background,
