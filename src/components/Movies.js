@@ -14,7 +14,7 @@ const Movies = (props) => {
                     backgroundColor: props.themeState.background,
                     color: props.themeState.foreground
                 }}>
-                    <Card.Img variant="top" src={movie.Poster === "N/A" ? (defaultPoster) : (movie.Poster)} height={340} />
+                    <Card.Img variant="top" src={movie.Poster === "N/A" ? (defaultPoster) : (movie.Poster)} height={340} alt="poster"/>
                     <Card.Body className="text-center">
                         <Card.Text>
                             <Row className="justify-content-center">

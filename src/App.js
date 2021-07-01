@@ -1,4 +1,5 @@
-import React, {useState,useEffect,useContext , useReducer } from "react";
+import React, { useEffect, useContext , useReducer } from "react";
+import useLocalStorage from "./hooks/useLocalStorage";
 import './App.css';
 import Header from "./components/Header";
 import Movies from "./components/Movies";
@@ -42,10 +43,6 @@ const App = () => {
         }
     };
 
-    /** const [movies, setMovies] = useState([]);
-     const [errorMessage, setErrorMessage] = useState(null);
-     const [loading,setLoading] = useState(true); **/
-
     const initialState = {
         loading:true,
         movies:[],
@@ -54,8 +51,8 @@ const App = () => {
 
     const [state,dispatch] = useReducer(reducer, initialState);
     const theme = useContext(ThemeContext);
-    const [themeState, setThemeState] = useState(theme.dark);
-
+    const currentTheme = theme.dark;
+    const [themeState, setThemeState] = useLocalStorage('theme', currentTheme);
     const { loading , movies, errorMessage} = state;
 
     useEffect(() => {
@@ -67,9 +64,6 @@ const App = () => {
                     type: "GET_MOVIES_SUCCESS",
                     payload: jsonResponse.Search
                 });
-
-                /** setMovies(jsonResponse.Search);
-                setLoading(false); **/
             });
     }, []);
 
@@ -77,9 +71,6 @@ const App = () => {
         dispatch({
             type:"GET_MOVIES_REQUEST"
         });
-
-        /** setErrorMessage(null);
-        setLoading(true); **/
 
         fetch(`https://www.omdbapi.com/?s=${searchValue}&apikey=346a3183`)
             .then(response => response.json())
@@ -89,15 +80,11 @@ const App = () => {
                         type: "GET_MOVIES_SUCCESS",
                         payload: jsonResponse.Search
                     });
-                    /** setMovies(jsonResponse.Search);
-                    setLoading(false); **/
                 } else {
                     dispatch({
                         type: "GET_MOVIES_FAILURE",
                         error: jsonResponse.Error
                     });
-                    /** setErrorMessage(jsonResponse.Error);
-                    setLoading(false); **/
                 }
             });
     };
@@ -119,16 +106,16 @@ const App = () => {
                                 </Spinner>
                             </Container>
                         ):
-                        errorMessage ? (
-                            <Container className="text-center">
-                                <h3>{errorMessage}</h3>
-                                <p> <FontAwesomeIcon icon={faSearch}/> Do Search Again </p>
-                                <p> Or </p>
-                                <p><a href="/react-movie-search-app/"> Go Back </a></p>
-                            </Container>
-                        ) : (
-                            <Movies movies={movies} themeState={themeState}/>
-                        )
+                    errorMessage ? (
+                        <Container className="text-center">
+                            <h3>{errorMessage}</h3>
+                            <p> <FontAwesomeIcon icon={faSearch}/> Do Search Again </p>
+                            <p> Or </p>
+                            <p><a href="/"> Go Back </a></p>
+                        </Container>
+                    ) : (
+                        <Movies movies={movies} themeState={themeState}/>
+                    )
                 }
             </section>
             <Footer/>

@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faMoon, faSearch, faVideo} from "@fortawesome/free-solid-svg-icons";
 
 const Header = (props) => {
-
     const darkMode = () => {
         props.setThemeState(props.theme.dark);
     };
@@ -29,7 +28,7 @@ const Header = (props) => {
             </Container>
             <div>
                 {
-                    (props.themeState === props.theme.dark) ? (
+                    (props.themeState.background === props.theme.dark.background) ? (
                         <OverlayTrigger key="bottom" placement="bottom" overlay={<Tooltip id={'tooltip-bottom'}> Turn Dark Mode Off </Tooltip>}>
                             <span onClick={lightMode} style={{cursor:"pointer"}}>
                                 <FontAwesomeIcon icon={faMoon} color="white"/>
